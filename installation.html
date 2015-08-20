@@ -81,22 +81,22 @@
 <div class="section" id="ubuntu-14-04-lts">
 <h3>Ubuntu 14.04 LTS<a class="headerlink" href="#ubuntu-14-04-lts" title="Permalink to this headline">¶</a></h3>
 <p>On <strong>Ubuntu 14.04 LTS</strong> everything can come from the default sources:</p>
-<div class="highlight-python"><div class="highlight"><pre># general dependencies
+<div class="highlight-python"><div class="highlight"><pre># General dependencies
 sudo apt-get install -y python-dev pkg-config
 
-# library components
+# Library components
 sudo apt-get install -y \
     libavformat-dev libavcodec-dev libavdevice-dev \
-    libavutil-dev libswscale-dev libavresample-dev \
+    libavutil-dev libswscale-dev libavresample-dev
 </pre></div>
 </div>
 </div>
 <div class="section" id="ubuntu-12-04-lts">
 <h3>Ubuntu 12.04 LTS<a class="headerlink" href="#ubuntu-12-04-lts" title="Permalink to this headline">¶</a></h3>
 <p>On <strong>Ubuntu 12.04 LTS</strong> you will be unable to satisfy these requirements with the default package sources. We recomment compiling and installing FFmpeg or Libav from source. For FFmpeg:</p>
-<div class="highlight-python"><div class="highlight"><pre>wget http://ffmpeg.org/releases/ffmpeg-1.2.2.tar.bz2
-tar -xjf ffmpeg-1.2.2.tar.bz2
-cd ffmpeg-1.2.2
+<div class="highlight-python"><div class="highlight"><pre>wget http://ffmpeg.org/releases/ffmpeg-2.7.tar.bz2
+tar -xjf ffmpeg-2.7.tar.bz2
+cd ffmpeg-2.7
 
 ./configure --disable-static --enable-shared --disable-doc
 make
@@ -120,8 +120,7 @@ sudo make install
 $ cd PyAV
 $ virtualenv venv
 $ . venv/bin/activate
-$ pip install cython pil
-$ make
+$ pip install cython
 $ python setup.py build_ext --inplace
 </pre></div>
 </div>

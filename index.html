@@ -51,7 +51,7 @@
             
   <div class="section" id="pyav-documentation">
 <h1><strong>PyAV</strong> Documentation<a class="headerlink" href="#pyav-documentation" title="Permalink to this headline">¶</a></h1>
-<p><strong>PyAV</strong> aims to be a Pythonic binding for <a class="reference external" href="http://ffmpeg.org">FFmpeg</a> or <a class="reference external" href="http://libav.org">Libav</a>. We aim to provide all of the power and control of the underlying library, but manage the gritty details for you as much as possible.</p>
+<p><strong>PyAV</strong> is a Pythonic binding for <a class="reference external" href="http://ffmpeg.org">FFmpeg</a> or <a class="reference external" href="http://libav.org">Libav</a>. We aim to provide all of the power and control of the underlying library, but manage the gritty details as much as possible.</p>
 <p>Currently we provide the basics of:</p>
 <ul class="simple">
 <li><a class="reference internal" href="api.html#av.container.Container" title="av.container.Container"><code class="xref py py-class docutils literal"><span class="pre">containers</span></code></a></li>
@@ -81,7 +81,7 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about.html">More About PyAV</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="about.html#caveats">Caveats</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#ffmpeg-vs-libav">FFmpeg vs Libav</a></li>
 <li class="toctree-l2"><a class="reference internal" href="about.html#links">Links</a></li>
 </ul>
 </li>
@@ -98,8 +98,29 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#utilities">Utilities</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on PyAV</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#the-real-goal">The Real Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#ffmpeg-vs-libav">FFmpeg vs Libav</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#library-detection">Library Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#function-detection">Function Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#struct-member-detection">Struct Member Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#class-relationships">Class Relationships</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hacking.html#time-in-libraries">Time in Libraries</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="includes.html">Wrapped C Types and Functions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="includes.html#libavformat-avformat-pxd">libavformat/avformat.pxd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavcodec-avcodec-pyav-h"><code class="docutils literal"><span class="pre">libavcodec/avcodec.pyav.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavformat-avformat-pyav-h"><code class="docutils literal"><span class="pre">libavformat/avformat.pyav.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-audio-fifo-h"><code class="docutils literal"><span class="pre">libavutil/audio_fifo.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-audioconvert-h"><code class="docutils literal"><span class="pre">libavutil/audioconvert.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-avutil-pyav-h"><code class="docutils literal"><span class="pre">libavutil/avutil.pyav.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-dict-h"><code class="docutils literal"><span class="pre">libavutil/dict.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-log-h"><code class="docutils literal"><span class="pre">libavutil/log.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-pixdesc-h"><code class="docutils literal"><span class="pre">libavutil/pixdesc.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-rational-h"><code class="docutils literal"><span class="pre">libavutil/rational.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libavutil-samplefmt-h"><code class="docutils literal"><span class="pre">libavutil/samplefmt.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libswresample-swresample-pyav-h"><code class="docutils literal"><span class="pre">libswresample/swresample.pyav.h</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="includes.html#libswscale-swscale-h"><code class="docutils literal"><span class="pre">libswscale/swscale.h</span></code></a></li>
 </ul>
 </li>
 </ul>
