@@ -96,7 +96,6 @@ cdef class AudioStream(Stream):
         cdef int got_packet = 0
 
         if fifo_frame:
-
             # If the fifo_frame has a valid pts, scale it to the codec's time_base.
             # Remember that the AudioFifo time_base is always 1/sample_rate!
             if fifo_frame.ptr.pts != lib.AV_NOPTS_VALUE:
@@ -106,23 +105,53 @@ cdef class AudioStream(Stream):
                     self._codec_context.time_base
                 )
             else:
+                ##pyav old method
+                #fifo_frame.ptr.pts = lib.av_rescale(
+                #    self._codec_context.frame_number,
+                #    self._codec_context.sample_rate,
+                #    self._codec_context.frame_size,
+                #)
+                ##to us
+                #pts_us = lib.av_rescale(
+                #    self._codec_context.frame_number,
+                #    self._codec_context.frame_size*1000000,
+                #    self._codec_context.sample_rate,
+                #)
+                ##to 90KHz
+                #pts_90 = lib.av_rescale(
+                #    self._codec_context.frame_number,
+                #    self._codec_context.frame_size*90000,
+                #    self._codec_context.sample_rate,
+                #)
+                #to samplerateKHz 
                 fifo_frame.ptr.pts = lib.av_rescale(
-                    self._codec_context.frame_number,
-                    self._codec_context.sample_rate,
+                    self._codec_context.frame_number + 2,
                     self._codec_context.frame_size,
+                    1,
                 )
-                
-        err_check(lib.avcodec_encode_audio2(
-            self._codec_context,
-            &packet.struct,
-            fifo_frame.ptr if fifo_frame is not None else NULL,
-            &got_packet,
-        ))
+                #print 'post fifo using lib av rescale on sample rate: %u frame size: %u frame number %u codec time base %s frame time base %s for pts %u ' \
+                #     % (self._codec_context.sample_rate,
+                #        self._codec_context.frame_size,
+                #        self._codec_context.frame_number,
+                #        self._codec_context.time_base,
+                #        fifo_frame.time_base,
+                #        fifo_frame.ptr.pts,
+                #        )
+        if fifo_frame != None or input_frame == None:
+           err_check(lib.avcodec_encode_audio2(
+               self._codec_context,
+               &packet.struct,
+               fifo_frame.ptr if fifo_frame is not None else NULL,
+               &got_packet,
+           ))
         if not got_packet:
             return
         
         # Rescale some times which are in the codec's time_base to the
         # stream's time_base.
+        #print 'encoder returned pts: %u dts: %u duration %u stream time base %s' % (
+        #       packet.struct.pts, packet.struct.dts, packet.struct.duration, 
+        #       self._stream.time_base)
         if packet.struct.pts != lib.AV_NOPTS_VALUE:
             packet.struct.pts = lib.av_rescale_q(
                 packet.struct.pts,
@@ -141,6 +170,8 @@ cdef class AudioStream(Stream):
                 self._codec_context.time_base,
                 self._stream.time_base
             )
+        #print 'encoder post rescale pts: %u dts: %u duration %u' % (
+        #       packet.struct.pts, packet.struct.dts, packet.struct.duration)
            
         # `coded_frame` is "the picture in the bitstream"; does this make
         # sense for audio?  
